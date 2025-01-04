@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:notifytuneplus/components/mybutton.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,6 +10,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchcontroller = TextEditingController();
+
+  void userclicked() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +43,21 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Icon(Icons.search)
               ],
+            ),
+            Row(
+              children: [
+                MyButton(onPressed: userclicked, text: "Rooms"),
+                MyButton(onPressed: userclicked, text: "People"),
+              ],
+            ),
+            Text(
+              "Trending Tags",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             )
-            
+            //Todo:Grid view of the trending tags......
           ],
         ),
       ),
