@@ -6,57 +6,88 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              "lib/assets/logo.svg",
-              height: 50,
-              width: 50,
+            Column(
+              children: [
+                // Optional Logo Placeholder
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.teal.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Icon(
+                    Icons.chat_bubble_outline,
+                    size: 40,
+                    color: Colors.teal,
+                  ),
+                ),
+                SizedBox(height: 30),
+                Text(
+                  "Welcome to Notify Tune Plus",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal[900],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "A chat system powered by AI, enabling people to discuss various topics in rooms effortlessly.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[700],
+                    height: 1.5,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 30,
-            ),
-            Text(
-              "Welcome to Notify Tune Plus",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Text(
-              "A chat system powered by ai,to enable people chat and disscus about various topics in rooms ",
-              style: TextStyle(color: Colors.grey[700]),
             ),
             GestureDetector(
-              // onTap: Navigator.pushNamed((context), "/homepage"),
+              onTap: () {
+                Navigator.pushNamed(context, "/homepage");
+              },
               child: Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.teal,
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    // onTap: Navigator,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Get started"),
-                        Icon(
-                          Icons.arrow_right_alt,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15.0,
+                    horizontal: 40.0,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Get Started",
+                        style: TextStyle(
                           color: Colors.white,
-                        )
-                      ],
-                    ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.white,
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
