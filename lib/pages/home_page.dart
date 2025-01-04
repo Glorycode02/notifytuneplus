@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          "Notify Tune Plus +",
+          "Notify Tune +",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.blue[900],
+            color: Colors.teal[900],
           ),
         ),
         elevation: 0,
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
-        selectedItemColor: Colors.blue[900], // Highlight color for active tab
+        selectedItemColor: Colors.teal[900], // Highlight color for active tab
         unselectedItemColor: Colors.grey[600], // Color for inactive tabs
         items: [
           BottomNavigationBarItem(
