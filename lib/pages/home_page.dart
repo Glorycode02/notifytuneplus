@@ -22,19 +22,19 @@ class _HomePageState extends State<HomePage> {
     String route;
     switch (index) {
       case 0:
-        route = "/homepage"; // Matches your route name
+        route = "/homepage";
         break;
       case 1:
-        route = "/chats"; // Matches your route name
+        route = "/chats";
         break;
       case 2:
-        route = "/notifications"; // Matches your route name
+        route = "/notifications";
         break;
       case 3:
-        route = "/profile"; // Matches your route name
+        route = "/profile";
         break;
       default:
-        return; // If something goes wrong, do nothing
+        return;
     }
 
     // Navigate only if it's a different route

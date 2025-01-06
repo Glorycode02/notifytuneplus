@@ -9,6 +9,6 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Profile"),
       ),
-    );;
+    );
   }
 }

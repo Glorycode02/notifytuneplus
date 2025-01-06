@@ -29,27 +29,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class HomePage extends StatelessWidget {
-//   const HomePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           'Notify Tune +',
-//           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-//         ),
-//       ), 
-
-//       body: ,
-//       bottomNavigationBar: BottomNavigationBar(
-//           items: [
-//             BottomNavigationBarItem(icon: Icon(Icons.home)),
-//             BottomNavigationBarItem(icon: Icon(Icons.message)),
-//             BottomNavigationBarItem(icon: Icon(Icons.notifications)),
-//             BottomNavigationBarItem(icon: Icon(Icons.account_box))
-//           ]),
-//     );
-//   }
-// }

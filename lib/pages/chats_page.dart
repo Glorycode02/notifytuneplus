@@ -11,14 +11,13 @@ class ChatsPage extends StatefulWidget {
 
 class _ChatsPageState extends State<ChatsPage> {
   final TextEditingController _chatsearchcontroller = TextEditingController();
-  int _currentIndex = 0; // Track the current active index
+  int _currentIndex = 1; // Default active tab is Chats
 
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
 
-    // Routing Logic done by Amini glory
     String route;
     switch (index) {
       case 0:
@@ -37,7 +36,6 @@ class _ChatsPageState extends State<ChatsPage> {
         return;
     }
 
-    // Navigate only if it's a different route
     if (ModalRoute.of(context)?.settings.name != route) {
       Navigator.pushNamed(context, route);
     }
@@ -48,20 +46,22 @@ class _ChatsPageState extends State<ChatsPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
-          "Notify Tune +",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.teal[900],
-          ),
+        title: Row(
+          children: [
+            SizedBox(width: 10),
+            Text(
+              "Notify Tune +",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.teal[900],
+              ),
+            ),
+          ],
         ),
-        elevation: 0,
-        backgroundColor: Colors.white, // AppBar background color
+        elevation: 4,
+        backgroundColor: Colors.white,
       ),
-      // SizedBox(
-      //   height: 30,
-      // ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         child: Column(
@@ -71,74 +71,81 @@ class _ChatsPageState extends State<ChatsPage> {
               children: [
                 Text(
                   "Chats",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 Row(
-                  children: [Icon(Icons.edit_square), Icon(Icons.more_vert)],
+                  children: [
+                    Icon(Icons.edit, color: Colors.teal[900]),
+                    SizedBox(width: 15),
+                    Icon(Icons.more_vert, color: Colors.grey[600]),
+                  ],
                 )
               ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _chatsearchcontroller,
-                    decoration: InputDecoration(
-                      filled: true, // Enable background color
-                      fillColor: Colors.grey[200], // Light grey background
-                      hintText: "Search...",
-                      hintStyle: TextStyle(
-                          color: Colors.grey[600]), // Greyish hint text
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Colors.grey[600], // Icon inside input
-                      ),
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 15), // Adjust height
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(50), // Rounded corners
-                        borderSide: BorderSide.none, // Remove border lines
-                      ),
-                    ),
-                  ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _chatsearchcontroller,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.grey[100],
+                hintText: "Search chats...",
+                prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
+                suffixIcon: _chatsearchcontroller.text.isNotEmpty
+                    ? IconButton(
+                        icon: Icon(Icons.clear, color: Colors.grey[600]),
+                        onPressed: () => _chatsearchcontroller.clear(),
+                      )
+                    : null,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
                 ),
-              ],
+              ),
             ),
-            SizedBox(
-              height: 30,
+            SizedBox(height: 20),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  MyButton(onPressed: () {}, text: "All"),
+                  MyButton(onPressed: () {}, text: "Personal"),
+                  MyButton(onPressed: () {}, text: "Groups"),
+                  MyButton(onPressed: () {}, text: "Favorites"),
+                ].map((button) => Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: button,
+                    )).toList(),
+              ),
             ),
-            Row(
-              children: [
-                MyButton(onPressed: () {}, text: "All"),
-                MyButton(onPressed: () {}, text: "Personal"),
-                MyButton(onPressed: () {}, text: "Groups"),
-                MyButton(onPressed: () {}, text: "Favourites")
-              ],
+            SizedBox(height: 20),
+            Expanded(
+              child: ListView(
+                children: [
+                  MessageTile(
+                    icon: Icons.person,
+                    username: 'Neza Hakim',
+                    message: 'Se u tmrw dear devs!!',
+                    time: "10:00 AM",
+                    messagecount: 5,
+                  ),
+                  MessageTile(
+                    icon: Icons.person,
+                    username: 'Glory code',
+                    message: 'Hello Guys!!',
+                    time: "10:00 AM",
+                    messagecount: 5,
+                  ),
+                ],
+              ),
             ),
-            MessageTile(
-                icon: Icons.person,
-                username: 'Neza Hakim',
-                message: 'Se u tmrw dear devs!!',
-                time: "10:00 AM",
-                messagecount: 5),
-            MessageTile(
-                icon: Icons.person,
-                username: 'Glory code',
-                message: 'Hello Guys!!',
-                time: "10:00 AM",
-                messagecount: 5)
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
-        selectedItemColor: Colors.teal[900], // Highlight color for active tab
-        unselectedItemColor: Colors.grey[600], // Color for inactive tabs
+        selectedItemColor: Colors.teal[900],
+        unselectedItemColor: Colors.grey[600],
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -157,8 +164,8 @@ class _ChatsPageState extends State<ChatsPage> {
             label: "Profile",
           ),
         ],
-        backgroundColor: Colors.white, // Background color of the bar
-        type: BottomNavigationBarType.fixed, // Fixed icons and labels
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
         elevation: 10,
       ),
     );

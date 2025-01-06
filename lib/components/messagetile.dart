@@ -65,12 +65,16 @@ class MessageTile extends StatelessWidget {
                     width: 20,
                     height: 20,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100)
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.green,
                     ),
-                    child: Text(
-                      messagecount.toString(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Text(
+                        messagecount.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
+                        ),
                       ),
                     ),
                   ),
