@@ -10,34 +10,44 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchcontroller = TextEditingController();
+  int _currentIndex = 0;
 
-  int _currentIndex = 0; // Track the current active index
+  final List<String> trendingTags = [
+    "#Music",
+    "#Tech",
+    "#Sports",
+    "#Cooking",
+    "#Fashion",
+    "#Movies",
+    "#Health",
+    "#Food",
+    "#Gaming",
+    "#Art",
+  ];
 
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
 
-    // Define the route based on the selected tab
     String route;
     switch (index) {
       case 0:
-        route = "/homepage"; // Matches your route name
+        route = "/homepage";
         break;
       case 1:
-        route = "/chats"; // Matches your route name
+        route = "/chats";
         break;
       case 2:
-        route = "/notifications"; // Matches your route name
+        route = "/notifications";
         break;
       case 3:
-        route = "/profile"; // Matches your route name
+        route = "/profile";
         break;
       default:
-        return; // If something goes wrong, do nothing
+        return;
     }
 
-    // Navigate only if it's a different route
     if (ModalRoute.of(context)?.settings.name != route) {
       Navigator.pushNamed(context, route);
     }
@@ -57,35 +67,32 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         elevation: 0,
-        backgroundColor: Colors.white, // AppBar background color
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20), // Add spacing for better layout
+            SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _searchcontroller,
                     decoration: InputDecoration(
-                      filled: true, // Enable background color
-                      fillColor: Colors.grey[200], // Light grey background
+                      filled: true,
+                      fillColor: Colors.grey[200],
                       hintText: "Search...",
-                      hintStyle: TextStyle(
-                          color: Colors.grey[600]), // Greyish hint text
+                      hintStyle: TextStyle(color: Colors.grey[600]),
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Colors.grey[600], // Icon inside input
+                        color: Colors.grey[600],
                       ),
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 15), // Adjust height
+                      contentPadding: EdgeInsets.symmetric(vertical: 15),
                       border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(12), // Rounded corners
-                        borderSide: BorderSide.none, // Remove border lines
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
                       ),
                     ),
                   ),
@@ -100,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 MyButton(onPressed: () {}, text: "People"),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Text(
               "Trending Tags",
               style: TextStyle(
@@ -108,15 +115,44 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            // TODO: Add Grid view of the trending tags......
+            SizedBox(height: 5),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: 2,
+                ),
+                itemCount: trendingTags.length,
+                padding: EdgeInsets.only(bottom: 0),
+                itemBuilder: (context, index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF3A82FF),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      trendingTags[index],
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
-        selectedItemColor: Colors.teal[900], // Highlight color for active tab
-        unselectedItemColor: Colors.grey[600], // Color for inactive tabs
+        selectedItemColor: Colors.teal[900],
+        unselectedItemColor: Colors.grey[600],
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -135,8 +171,8 @@ class _HomePageState extends State<HomePage> {
             label: "Profile",
           ),
         ],
-        backgroundColor: Colors.white, // Background color of the bar
-        type: BottomNavigationBarType.fixed, // Fixed icons and labels
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
         elevation: 10,
       ),
     );
